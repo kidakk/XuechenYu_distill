@@ -1,0 +1,20 @@
+---
+title: "Building a {distill} website"
+description: |
+  How I built this site using {distill}
+author:
+  - name: Yu Xuechen
+date: 10-08-2021
+preview: blog_distill_photo.jpg
+output: 
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Here is where I will talk about building this website. 
+

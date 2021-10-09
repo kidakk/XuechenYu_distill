@@ -1,0 +1,19 @@
+[
+  {
+    "path": "posts/2021-10-08-buildingdistill/",
+    "title": "Building a {distill} website",
+    "description": "How I built this site using {distill}",
+    "author": [
+      {
+        "name": "Yu Xuechen",
+        "url": {}
+      }
+    ],
+    "date": "2021-10-08",
+    "categories": [],
+    "contents": "\nHere is where I will talk about building this website.\n\n\n\n",
+    "preview": "posts/2021-10-08-buildingdistill/blog_distill_photo.jpg",
+    "last_modified": "2021-10-08T23:49:30-05:00",
+    "input_file": {}
+  }
+]
