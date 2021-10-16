@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2021-10-16-shiny-app/",
+    "title": "My first shiny app",
+    "description": "My first shiny app",
+    "author": [
+      {
+        "name": "Yu Xuechen",
+        "url": {}
+      }
+    ],
+    "date": "2021-10-16",
+    "categories": [],
+    "contents": "\nMy first shiny app examine the density plot using Lisa’s garden dataset across different varieties of veggies.\n\n\n\n",
+    "preview": "posts/2021-10-16-shiny-app/shiny.jpg",
+    "last_modified": "2021-10-16T12:23:40-05:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2021-10-08-buildingdistill/",
     "title": "Building a {distill} website",
     "description": "How I built this site using {distill}",

@@ -1,0 +1,20 @@
+---
+title: "My first shiny app"
+description: |
+  My first shiny app
+author:
+  - name: Yu Xuechen
+date: 10-16-2021
+preview: shiny.jpg
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+My first shiny app examine the density plot using Lisa's garden dataset across different varieties of veggies. 
+
+
