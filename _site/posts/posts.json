@@ -13,8 +13,8 @@
     "categories": [],
     "contents": "\nMy first shiny app examine the density plot using Lisa’s garden dataset across different varieties of veggies.\nlink to shiny\ngithub\n\n\n\n",
     "preview": "posts/2021-10-16-shiny-app/shiny.jpg",
-    "last_modified": "2021-10-16T12:34:35-05:00",
-    "input_file": {}
+    "last_modified": "2021-10-16T12:43:10-05:00",
+    "input_file": "shiny-app.knit.md"
   },
   {
     "path": "posts/2021-10-08-buildingdistill/",
