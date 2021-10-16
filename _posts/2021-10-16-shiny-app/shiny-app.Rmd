@@ -16,5 +16,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 My first shiny app examine the density plot using Lisa's garden dataset across different varieties of veggies. 
+[link to shiny](https://www.shinyapps.io/admin/#/applications/all)
 
+[github](https://github.com/kidakk/intro_to_shiny)
 
