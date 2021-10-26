@@ -1,0 +1,74 @@
+---
+title: "Tidy Tuesday 1"
+description: |
+  A short description of the post.
+author:
+  - name: Yu Xuechen
+    url: {}
+date: 10-26-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+---
+title: "Tidy Tuesday"
+author: "Xuechen"
+date: "10/26/2021"
+output: html_document
+---
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+```
+
+```{r}
+# Get the Data
+
+# Read in with tidytuesdayR package 
+# Install from CRAN via: install.packages("tidytuesdayR")
+# This loads the readme and all the datasets for the week of interest
+
+# Either ISO-8601 date or year/week works!
+
+tuesdata <- tidytuesdayR::tt_load('2021-07-27')
+tuesdata <- tidytuesdayR::tt_load(2021, week = 31)
+
+olympics <- tuesdata$olympics
+
+# Or read in the data manually
+
+olympics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-07-27/olympics.csv')
+```
+
+How many country got the most medals?
+
+```{r}
+olympics$team = as.factor(olympics$team)
+
+olympics %>% 
+  filter(year >= 2016) %>% 
+  drop_na() %>% 
+  group_by(team) %>% 
+  summarise(count = n()) %>% 
+  arrange(desc(count)) %>%
+  head(15) %>% 
+  ggplot(aes(x = fct_reorder(team, count, .desc = TRUE), y = count)) +
+  geom_bar(position = position_dodge(), stat = "identity", width = .7, fill = "lightblue") +
+  geom_text(aes(x = as.factor(team), y = count, label = count),
+    position = position_dodge(width = 0.8),
+    vjust = -1, size = 2,
+    fontface = "bold") +
+  ggtitle("Country medal counts in 2016") +
+  theme(axis.text.x = element_text(angle = 90)) + 
+  xlab("Countries in 2016 olympics") +
+  ylab("Total medal counts")
+```
+
+The side-by-side bar plot helps to visulize the countries getting the most number of medals in 2016 across all categories, with their medal counts.
+
