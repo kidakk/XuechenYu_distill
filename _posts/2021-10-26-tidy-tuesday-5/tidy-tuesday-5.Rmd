@@ -1,0 +1,55 @@
+---
+title: "Tidy Tuesday 5"
+description: |
+  Tidy Tuesday 5! The Ultra Trail Running.
+author:
+  - name: Yu Xuechen
+    url: {}
+date: 10-26-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+---
+title: 'Tidy Tuesday 5'
+author: "Xuechen"
+date: "10/26/2021"
+output: html_document
+---
+
+```{r}
+library(ggplot2)
+library(tidyverse)
+library(lubridate)
+library(hms)
+```
+
+```{r}
+ultra_rankings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-10-26/ultra_rankings.csv')
+race <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-10-26/race.csv')
+ultra_rankings
+```
+What is the average running time for runners in different age groups for different genders?
+```{r}
+ultra_rankings %>%
+  filter(age > 10, age < 100) %>% 
+  drop_na() %>% 
+  mutate(minutes = time_in_seconds/60) %>% 
+  mutate(age_groups  = cut(age, seq(10, 140, 10))) %>% 
+  group_by(age_groups, gender) %>% 
+  summarise(mean = mean(minutes)) %>% 
+  ggplot(aes(x = as.factor(age_groups), y = mean, fill = gender)) +
+  geom_col(position = "dodge") +
+  geom_text(aes(x = as.factor(age_groups), y = mean, label = sprintf("%0.2f", round(mean, digits = 2))),
+    position = position_dodge(width = 0.8),
+    vjust = -1, size = 1.5,
+    fontface = "bold") +
+  ggtitle("Average running time for each age group splitted by gender") +
+  xlab("Age group in 10s") +
+  ylab("Average running time") +
+  theme(axis.text.x = element_text(angle = 90)) + 
+  theme_minimal()
+```
+
+The side by side bar plot shows the average running time for each age group in 10s (10s, 20s, 30s, 40s, 50s, 60s, 70s) and is splitted by gender. 

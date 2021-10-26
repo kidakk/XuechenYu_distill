@@ -17,6 +17,23 @@
     "input_file": "tidy-tuesday-1.knit.md"
   },
   {
+    "path": "posts/2021-10-26-tidy-tuesday-5/",
+    "title": "Tidy Tuesday 5",
+    "description": "Tidy Tuesday 5! The Ultra Trail Running.",
+    "author": [
+      {
+        "name": "Yu Xuechen",
+        "url": {}
+      }
+    ],
+    "date": "2021-10-26",
+    "categories": [],
+    "contents": "\n\n\nlibrary(ggplot2)\nlibrary(tidyverse)\nlibrary(lubridate)\nlibrary(hms)\n\n\n\n\n\nultra_rankings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-10-26/ultra_rankings.csv')\nrace <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-10-26/race.csv')\nultra_rankings\n\n\n# A tibble: 137,803 × 8\n   race_year_id  rank runner             time    age gender nationality\n          <dbl> <dbl> <chr>              <chr> <dbl> <chr>  <chr>      \n 1        68140     1 VERHEUL Jasper     26H …    30 M      GBR        \n 2        68140     2 MOULDING JON       27H …    43 M      GBR        \n 3        68140     3 RICHARDSON Phill   28H …    38 M      GBR        \n 4        68140     4 DYSON Fiona        30H …    55 W      GBR        \n 5        68140     5 FRONTERAS Karen    32H …    48 W      GBR        \n 6        68140     6 THOMAS Leigh       32H …    31 M      GBR        \n 7        68140     7 SHORT Deborah      33H …    55 W      GBR        \n 8        68140     8 CROSSLEY Catharine 33H …    40 W      GBR        \n 9        68140     9 BUTCHER Kent       34H …    47 M      GBR        \n10        68140    10 Hendry Bill        34H …    29 M      GBR        \n# … with 137,793 more rows, and 1 more variable:\n#   time_in_seconds <dbl>\n\nWhat is the average running time for runners in different age groups for different genders?\n\n\nultra_rankings %>%\n  filter(age > 10, age < 100) %>% \n  drop_na() %>% \n  mutate(minutes = time_in_seconds/60) %>% \n  mutate(age_groups  = cut(age, seq(10, 140, 10))) %>% \n  group_by(age_groups, gender) %>% \n  summarise(mean = mean(minutes)) %>% \n  ggplot(aes(x = as.factor(age_groups), y = mean, fill = gender)) +\n  geom_col(position = \"dodge\") +\n  geom_text(aes(x = as.factor(age_groups), y = mean, label = sprintf(\"%0.2f\", round(mean, digits = 2))),\n    position = position_dodge(width = 0.8),\n    vjust = -1, size = 1.5,\n    fontface = \"bold\") +\n  ggtitle(\"Average running time for each age group splitted by gender\") +\n  xlab(\"Age group in 10s\") +\n  ylab(\"Average running time\") +\n  theme(axis.text.x = element_text(angle = 90)) + \n  theme_minimal()\n\n\n\n\nThe side by side bar plot shows the average running time for each age group in 10s (10s, 20s, 30s, 40s, 50s, 60s, 70s) and is splitted by gender.\n\n\n\n",
+    "preview": "posts/2021-10-26-tidy-tuesday-5/tidy-tuesday-5_files/figure-html5/unnamed-chunk-3-1.png",
+    "last_modified": "2021-10-26T11:09:03-05:00",
+    "input_file": "tidy-tuesday-5.knit.md"
+  },
+  {
     "path": "posts/2021-10-16-shiny-app/",
     "title": "My first shiny app",
     "description": "My first shiny app",
