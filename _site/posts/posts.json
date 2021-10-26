@@ -14,7 +14,7 @@
     "contents": "\n\n\nknitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)\n\n\n\n\n\nlibrary(tidyverse)\nlibrary(ggplot2)\n\n\n\n\n\n# Get the Data\n\n# Read in with tidytuesdayR package \n# Install from CRAN via: install.packages(\"tidytuesdayR\")\n# This loads the readme and all the datasets for the week of interest\n\n# Either ISO-8601 date or year/week works!\n\ntuesdata <- tidytuesdayR::tt_load('2021-07-27')\n\n\n\n    Downloading file 1 of 2: `olympics.csv`\n    Downloading file 2 of 2: `regions.csv`\n\ntuesdata <- tidytuesdayR::tt_load(2021, week = 31)\n\n\n\n    Downloading file 1 of 2: `olympics.csv`\n    Downloading file 2 of 2: `regions.csv`\n\nolympics <- tuesdata$olympics\n\n# Or read in the data manually\n\nolympics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-07-27/olympics.csv')\n\n\n\nHow many country got the most medals?\n\n\nolympics$team = as.factor(olympics$team)\n\nolympics %>% \n  filter(year >= 2016) %>% \n  drop_na() %>% \n  group_by(team) %>% \n  summarise(count = n()) %>% \n  arrange(desc(count)) %>%\n  head(15) %>% \n  ggplot(aes(x = fct_reorder(team, count, .desc = TRUE), y = count)) +\n  geom_bar(position = position_dodge(), stat = \"identity\", width = .7, fill = \"lightblue\") +\n  geom_text(aes(x = as.factor(team), y = count, label = count),\n    position = position_dodge(width = 0.8),\n    vjust = -1, size = 2,\n    fontface = \"bold\") +\n  ggtitle(\"Country medal counts in 2016\") +\n  theme(axis.text.x = element_text(angle = 90)) + \n  xlab(\"Countries in 2016 olympics\") +\n  ylab(\"Total medal counts\")\n\n\n\n\nThe side-by-side bar plot helps to visulize the countries getting the most number of medals in 2016 across all categories, with their medal counts.\n\n\n\n",
     "preview": "posts/2021-10-26-tidy-tuesday-1/tidy-tuesday-1_files/figure-html5/unnamed-chunk-4-1.png",
     "last_modified": "2021-10-26T11:06:22-05:00",
-    "input_file": "tidy-tuesday-1.knit.md"
+    "input_file": {}
   },
   {
     "path": "posts/2021-10-26-tidy-tuesday-5/",
@@ -31,7 +31,7 @@
     "contents": "\n\n\nlibrary(ggplot2)\nlibrary(tidyverse)\nlibrary(lubridate)\nlibrary(hms)\n\n\n\n\n\nultra_rankings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-10-26/ultra_rankings.csv')\nrace <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-10-26/race.csv')\nultra_rankings\n\n\n# A tibble: 137,803 × 8\n   race_year_id  rank runner             time    age gender nationality\n          <dbl> <dbl> <chr>              <chr> <dbl> <chr>  <chr>      \n 1        68140     1 VERHEUL Jasper     26H …    30 M      GBR        \n 2        68140     2 MOULDING JON       27H …    43 M      GBR        \n 3        68140     3 RICHARDSON Phill   28H …    38 M      GBR        \n 4        68140     4 DYSON Fiona        30H …    55 W      GBR        \n 5        68140     5 FRONTERAS Karen    32H …    48 W      GBR        \n 6        68140     6 THOMAS Leigh       32H …    31 M      GBR        \n 7        68140     7 SHORT Deborah      33H …    55 W      GBR        \n 8        68140     8 CROSSLEY Catharine 33H …    40 W      GBR        \n 9        68140     9 BUTCHER Kent       34H …    47 M      GBR        \n10        68140    10 Hendry Bill        34H …    29 M      GBR        \n# … with 137,793 more rows, and 1 more variable:\n#   time_in_seconds <dbl>\n\nWhat is the average running time for runners in different age groups for different genders?\n\n\nultra_rankings %>%\n  filter(age > 10, age < 100) %>% \n  drop_na() %>% \n  mutate(minutes = time_in_seconds/60) %>% \n  mutate(age_groups  = cut(age, seq(10, 140, 10))) %>% \n  group_by(age_groups, gender) %>% \n  summarise(mean = mean(minutes)) %>% \n  ggplot(aes(x = as.factor(age_groups), y = mean, fill = gender)) +\n  geom_col(position = \"dodge\") +\n  geom_text(aes(x = as.factor(age_groups), y = mean, label = sprintf(\"%0.2f\", round(mean, digits = 2))),\n    position = position_dodge(width = 0.8),\n    vjust = -1, size = 1.5,\n    fontface = \"bold\") +\n  ggtitle(\"Average running time for each age group splitted by gender\") +\n  xlab(\"Age group in 10s\") +\n  ylab(\"Average running time\") +\n  theme(axis.text.x = element_text(angle = 90)) + \n  theme_minimal()\n\n\n\n\nThe side by side bar plot shows the average running time for each age group in 10s (10s, 20s, 30s, 40s, 50s, 60s, 70s) and is splitted by gender.\n\n\n\n",
     "preview": "posts/2021-10-26-tidy-tuesday-5/tidy-tuesday-5_files/figure-html5/unnamed-chunk-3-1.png",
     "last_modified": "2021-10-26T11:09:03-05:00",
-    "input_file": "tidy-tuesday-5.knit.md"
+    "input_file": {}
   },
   {
     "path": "posts/2021-10-16-shiny-app/",
@@ -47,24 +47,7 @@
     "categories": [],
     "contents": "\nMy first shiny app examine the density plot using Lisa’s garden dataset across different varieties of veggies.\nlink to shiny\ngithub\n\n\n\n",
     "preview": "posts/2021-10-16-shiny-app/shiny.jpg",
-    "last_modified": "2021-10-16T12:43:10-05:00",
-    "input_file": "shiny-app.knit.md"
-  },
-  {
-    "path": "posts/2021-10-08-buildingdistill/",
-    "title": "Building a {distill} website",
-    "description": "How I built this site using {distill}",
-    "author": [
-      {
-        "name": "Yu Xuechen",
-        "url": {}
-      }
-    ],
-    "date": "2021-10-08",
-    "categories": [],
-    "contents": "\nHere is where I will talk about building this website.\n\n\n\n",
-    "preview": "posts/2021-10-08-buildingdistill/blog_distill_photo.jpg",
-    "last_modified": "2021-10-08T23:49:30-05:00",
+    "last_modified": "2021-10-16T12:43:11-05:00",
     "input_file": {}
   }
 ]
