@@ -2,7 +2,7 @@
   {
     "path": "posts/2021-10-26-tidy-tuesday-1/",
     "title": "Tidy Tuesday 1",
-    "description": "A short description of the post.",
+    "description": "Tidy Tuesday 1!",
     "author": [
       {
         "name": "Yu Xuechen",
@@ -13,7 +13,7 @@
     "categories": [],
     "contents": "\n\n\nknitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)\n\n\n\n\n\nlibrary(tidyverse)\nlibrary(ggplot2)\n\n\n\n\n\n# Get the Data\n\n# Read in with tidytuesdayR package \n# Install from CRAN via: install.packages(\"tidytuesdayR\")\n# This loads the readme and all the datasets for the week of interest\n\n# Either ISO-8601 date or year/week works!\n\ntuesdata <- tidytuesdayR::tt_load('2021-07-27')\n\n\n\n    Downloading file 1 of 2: `olympics.csv`\n    Downloading file 2 of 2: `regions.csv`\n\ntuesdata <- tidytuesdayR::tt_load(2021, week = 31)\n\n\n\n    Downloading file 1 of 2: `olympics.csv`\n    Downloading file 2 of 2: `regions.csv`\n\nolympics <- tuesdata$olympics\n\n# Or read in the data manually\n\nolympics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-07-27/olympics.csv')\n\n\n\nHow many country got the most medals?\n\n\nolympics$team = as.factor(olympics$team)\n\nolympics %>% \n  filter(year >= 2016) %>% \n  drop_na() %>% \n  group_by(team) %>% \n  summarise(count = n()) %>% \n  arrange(desc(count)) %>%\n  head(15) %>% \n  ggplot(aes(x = fct_reorder(team, count, .desc = TRUE), y = count)) +\n  geom_bar(position = position_dodge(), stat = \"identity\", width = .7, fill = \"lightblue\") +\n  geom_text(aes(x = as.factor(team), y = count, label = count),\n    position = position_dodge(width = 0.8),\n    vjust = -1, size = 2,\n    fontface = \"bold\") +\n  ggtitle(\"Country medal counts in 2016\") +\n  theme(axis.text.x = element_text(angle = 90)) + \n  xlab(\"Countries in 2016 olympics\") +\n  ylab(\"Total medal counts\")\n\n\n\n\nThe side-by-side bar plot helps to visulize the countries getting the most number of medals in 2016 across all categories, with their medal counts.\n\n\n\n",
     "preview": "posts/2021-10-26-tidy-tuesday-1/tidy-tuesday-1_files/figure-html5/unnamed-chunk-4-1.png",
-    "last_modified": "2021-10-26T11:03:30-05:00",
+    "last_modified": "2021-10-26T11:06:22-05:00",
     "input_file": "tidy-tuesday-1.knit.md"
   },
   {

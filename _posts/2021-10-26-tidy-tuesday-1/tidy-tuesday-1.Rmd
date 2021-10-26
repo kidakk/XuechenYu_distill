@@ -1,7 +1,7 @@
 ---
 title: "Tidy Tuesday 1"
 description: |
-  A short description of the post.
+  Tidy Tuesday 1!
 author:
   - name: Yu Xuechen
     url: {}
