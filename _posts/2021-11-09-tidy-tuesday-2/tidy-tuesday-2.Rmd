@@ -1,0 +1,58 @@
+---
+title: "Tidy Tuesday 2"
+description: |
+  Tidy Tuesday 2! The Emmy Award.
+author:
+  - name: Yu Xuechen
+    url: {}
+date: 11-09-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+```
+
+```{r}
+tuesdata <- tidytuesdayR::tt_load('2021-09-21')
+tuesdata <- tidytuesdayR::tt_load(2021, week = 39)
+
+nominees <- tuesdata$nominees
+
+# Or read in the data manually
+
+nominees <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-09-21/nominees.csv')
+
+
+```
+
+What is the number of Winners and Nominees from 2011 to 2021?
+```{r}
+#plot across all categories
+nominees %>% 
+  filter(year>2010) %>% 
+  group_by(year, type) %>% 
+  summarize(count = n()) %>% 
+  #mutate(count = n())
+  ggplot(aes(x = as.factor(year), y = count, fill = type)) +
+  geom_bar(position = position_dodge(), stat = "identity", width = .7) +
+ geom_text(aes(x = as.factor(year), y = count, label = count),
+    position = position_dodge(width = 0.8),
+    vjust = -1, size = 2,
+    fontface = "bold") +
+  labs(title = "Emmy Awards and Nominees from 2011 to 2021") +
+  theme_minimal()+
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank())
+```
+
+The side-by-side bar plot helps to visulize the difference between Nominee and Winner for each year. It is easy to show the numbers for each category on the graph. 
+
+

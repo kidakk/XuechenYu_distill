@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2021-11-09-tidy-tuesday-2/",
+    "title": "Tidy Tuesday 2",
+    "description": "Tidy Tuesday 2! The Emmy Award.",
+    "author": [
+      {
+        "name": "Yu Xuechen",
+        "url": {}
+      }
+    ],
+    "date": "2021-11-09",
+    "categories": [],
+    "contents": "\n\n\nknitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)\n\n\n\n\n\nlibrary(tidyverse)\nlibrary(ggplot2)\n\n\n\n\n\ntuesdata <- tidytuesdayR::tt_load('2021-09-21')\n\n\n\n    Downloading file 1 of 1: `nominees.csv`\n\ntuesdata <- tidytuesdayR::tt_load(2021, week = 39)\n\n\n\n    Downloading file 1 of 1: `nominees.csv`\n\nnominees <- tuesdata$nominees\n\n# Or read in the data manually\n\nnominees <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-09-21/nominees.csv')\n\n\n\nWhat is the number of Winners and Nominees from 2011 to 2021?\n\n\n#plot across all categories\nnominees %>% \n  filter(year>2010) %>% \n  group_by(year, type) %>% \n  summarize(count = n()) %>% \n  #mutate(count = n())\n  ggplot(aes(x = as.factor(year), y = count, fill = type)) +\n  geom_bar(position = position_dodge(), stat = \"identity\", width = .7) +\n geom_text(aes(x = as.factor(year), y = count, label = count),\n    position = position_dodge(width = 0.8),\n    vjust = -1, size = 2,\n    fontface = \"bold\") +\n  labs(title = \"Emmy Awards and Nominees from 2011 to 2021\") +\n  theme_minimal()+\n  theme(axis.title.x = element_blank(),\n        axis.title.y = element_blank())\n\n\n\n\nThe side-by-side bar plot helps to visulize the difference between Nominee and Winner for each year. It is easy to show the numbers for each category on the graph.\n\n\n\n",
+    "preview": "posts/2021-11-09-tidy-tuesday-2/tidy-tuesday-2_files/figure-html5/unnamed-chunk-4-1.png",
+    "last_modified": "2021-11-09T10:00:05-06:00",
+    "input_file": "tidy-tuesday-2.knit.md"
+  },
+  {
     "path": "posts/2021-10-26-tidy-tuesday-1/",
     "title": "Tidy Tuesday 1",
     "description": "Tidy Tuesday 1!",
