@@ -82,6 +82,6 @@
     "contents": "\nThe shiny app has a user interface that helps users to explore different interpretable machine learning methods, such as the Ceteris Perabus Profile.\nlink to shiny\ngithub\n\n\n\n",
     "preview": "posts/2021-11-20-interpretable-machine-learning-shiny-app/shiny.jpg",
     "last_modified": "2021-11-20T18:53:21-06:00",
-    "input_file": "interpretable-machine-learning-shiny-app.knit.md"
+    "input_file": {}
   }
 ]

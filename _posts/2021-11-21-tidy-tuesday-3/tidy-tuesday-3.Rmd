@@ -1,0 +1,65 @@
+---
+title: "Tidy Tuesday 3"
+description: |
+  A short description of the post.
+author:
+  - name: Yu Xuechen
+    url: {}
+date: 11-21-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+# Get the Data
+
+# Read in with tidytuesdayR package 
+# Install from CRAN via: install.packages("tidytuesdayR")
+# This loads the readme and all the datasets for the week of interest
+
+# Either ISO-8601 date or year/week works!
+
+tuesdata <- tidytuesdayR::tt_load('2021-03-23')
+tuesdata <- tidytuesdayR::tt_load(2021, week = 13)
+
+unvotes <- tuesdata$unvotes
+```
+
+```{r}
+library(ggplot2)
+library(tidyverse)
+library(tidytext)
+```
+
+```{r}
+un_5_country = c("United States",'United Kingdom','China','France','Russia')
+
+unvotes %>% 
+  filter(country %in% un_5_country) %>% 
+  group_by(country, vote) %>% 
+  summarise(count = n()) %>% 
+  #mutate(vote = reorder_within(vote, count, country)) %>%
+  ggplot(aes(x = country, y = count, fill = vote)) + 
+  facet_wrap(~vote) +
+  geom_bar(position = position_dodge(), stat = "identity", width = .7) +
+  geom_text(aes(x = country, y = count, label = count),
+    position = position_dodge(width = 0.8),
+    vjust = -1, size = 2,
+    fontface = "bold") +
+  labs(title = "Vote categorie for the Security Council") +
+  ylim(0, 4500) +
+  xlab("UN Security Council grouped by vote") +
+  ylab("Total number of votes") +
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+
+The side by side bar plot is grouped by different types of vote - abstain, no and yes. It shows the total number of votes in each categories for the 5 UN Security Councils. 
+
+
