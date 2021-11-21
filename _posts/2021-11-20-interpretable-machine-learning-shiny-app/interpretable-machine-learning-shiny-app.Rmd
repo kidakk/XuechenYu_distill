@@ -1,0 +1,24 @@
+---
+title: "interpretable machine learning shiny app"
+description: |
+  Interpretable machine learning shiny app
+author:
+  - name: Yu Xuechen
+date: 10-16-2021
+preview: shiny.jpg
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+The shiny app has a user interface that helps users to explore different interpretable machine learning methods, such as the Ceteris Perabus Profile. 
+
+[link to shiny](https://xuechen-yu.shinyapps.io/interpretable_machine_learning/)
+
+[github](https://github.com/kidakk/lending_small)
+
