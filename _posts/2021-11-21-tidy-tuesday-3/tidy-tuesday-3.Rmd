@@ -1,7 +1,7 @@
 ---
 title: "Tidy Tuesday 3"
 description: |
-  A short description of the post.
+  Vote of UN Security Councils
 author:
   - name: Yu Xuechen
     url: {}

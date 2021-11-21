@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2021-11-21-tidy-tuesday-3/",
+    "title": "Tidy Tuesday 3",
+    "description": "Vote of UN Security Councils",
+    "author": [
+      {
+        "name": "Yu Xuechen",
+        "url": {}
+      }
+    ],
+    "date": "2021-11-21",
+    "categories": [],
+    "contents": "\n\n\nknitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)\n\n\n\n\n\n# Get the Data\n\n# Read in with tidytuesdayR package \n# Install from CRAN via: install.packages(\"tidytuesdayR\")\n# This loads the readme and all the datasets for the week of interest\n\n# Either ISO-8601 date or year/week works!\n\ntuesdata <- tidytuesdayR::tt_load('2021-03-23')\n\n\n\n    Downloading file 1 of 3: `unvotes.csv`\n    Downloading file 2 of 3: `roll_calls.csv`\n    Downloading file 3 of 3: `issues.csv`\n\ntuesdata <- tidytuesdayR::tt_load(2021, week = 13)\n\n\n\n    Downloading file 1 of 3: `unvotes.csv`\n    Downloading file 2 of 3: `roll_calls.csv`\n    Downloading file 3 of 3: `issues.csv`\n\nunvotes <- tuesdata$unvotes\n\n\n\n\n\nlibrary(ggplot2)\nlibrary(tidyverse)\nlibrary(tidytext)\n\n\n\n\n\nun_5_country = c(\"United States\",'United Kingdom','China','France','Russia')\n\nunvotes %>% \n  filter(country %in% un_5_country) %>% \n  group_by(country, vote) %>% \n  summarise(count = n()) %>% \n  #mutate(vote = reorder_within(vote, count, country)) %>%\n  ggplot(aes(x = country, y = count, fill = vote)) + \n  facet_wrap(~vote) +\n  geom_bar(position = position_dodge(), stat = \"identity\", width = .7) +\n  geom_text(aes(x = country, y = count, label = count),\n    position = position_dodge(width = 0.8),\n    vjust = -1, size = 2,\n    fontface = \"bold\") +\n  labs(title = \"Vote categorie for the Security Council\") +\n  ylim(0, 4500) +\n  xlab(\"UN Security Council grouped by vote\") +\n  ylab(\"Total number of votes\") +\n  theme(axis.text.x = element_text(angle = 90))\n\n\n\n\nThe side by side bar plot is grouped by different types of vote - abstain, no and yes. It shows the total number of votes in each categories for the 5 UN Security Councils.\n\n\n\n",
+    "preview": "posts/2021-11-21-tidy-tuesday-3/tidy-tuesday-3_files/figure-html5/unnamed-chunk-4-1.png",
+    "last_modified": "2021-11-21T17:13:56-06:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2021-11-09-tidy-tuesday-2/",
     "title": "Tidy Tuesday 2",
     "description": "Tidy Tuesday 2! The Emmy Award.",
