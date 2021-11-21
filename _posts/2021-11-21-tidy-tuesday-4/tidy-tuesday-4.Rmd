@@ -1,0 +1,51 @@
+---
+title: "Tidy Tuesday 4"
+description: |
+  Forest Area of United States and China
+author:
+  - name: Yu Xuechen
+    url: {}
+date: 11-21-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
+```
+
+```{r}
+# Or read in the data manually
+
+forest <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/forest.csv')
+forest_area <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/forest_area.csv')
+brazil_loss <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/brazil_loss.csv')
+soybean_use <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/soybean_use.csv')
+vegetable_oil <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/vegetable_oil.csv')
+```
+```{r}
+library(tidyverse)
+library(ggplot2)
+```
+
+```{r}
+country = c("United States",'China')
+
+forest_area %>% 
+  filter(entity %in% country) %>% 
+  ggplot(aes(x = year, y = forest_area, shape = entity, color = entity)) +
+  facet_wrap(~entity) +
+  geom_point() +
+  geom_line() +
+  labs(title = "Change in forest area for US and China per year") +
+  xlab("Year (1990 - 2020)") +
+  ylab("Percent of global forest area") +
+  theme_minimal()+
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(), 
+        axis.text.x = element_text(angle = 90))
+```
+
+
+The line graph shows the change in forest area per year for China and the United States as a percent of global forest area. Both China and United States show a increasing trend while the change in China increases more significantly. 

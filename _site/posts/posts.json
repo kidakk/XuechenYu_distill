@@ -17,6 +17,23 @@
     "input_file": {}
   },
   {
+    "path": "posts/2021-11-21-tidy-tuesday-4/",
+    "title": "Tidy Tuesday 4",
+    "description": "Forest Area of United States and China",
+    "author": [
+      {
+        "name": "Yu Xuechen",
+        "url": {}
+      }
+    ],
+    "date": "2021-11-21",
+    "categories": [],
+    "contents": "\n\n\nknitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)\n\n\n\n\n\n# Or read in the data manually\n\nforest <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/forest.csv')\nforest_area <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/forest_area.csv')\nbrazil_loss <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/brazil_loss.csv')\nsoybean_use <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/soybean_use.csv')\nvegetable_oil <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/vegetable_oil.csv')\n\n\n\n\n\nlibrary(tidyverse)\nlibrary(ggplot2)\n\n\n\n\n\ncountry = c(\"United States\",'China')\n\nforest_area %>% \n  filter(entity %in% country) %>% \n  ggplot(aes(x = year, y = forest_area, shape = entity, color = entity)) +\n  facet_wrap(~entity) +\n  geom_point() +\n  geom_line() +\n  labs(title = \"Change in forest area for US and China per year\") +\n  xlab(\"Year (1990 - 2020)\") +\n  ylab(\"Percent of global forest area\") +\n  theme_minimal()+\n  theme(axis.title.x = element_blank(),\n        axis.title.y = element_blank(), \n        axis.text.x = element_text(angle = 90))\n\n\n\n\nThe line graph shows the change in forest area per year for China and the United States as a percent of global forest area. Both China and United States show a increasing trend while the change in China increases more significantly.\n\n\n\n",
+    "preview": "posts/2021-11-21-tidy-tuesday-4/tidy-tuesday-4_files/figure-html5/unnamed-chunk-4-1.png",
+    "last_modified": "2021-11-21T17:36:20-06:00",
+    "input_file": "tidy-tuesday-4.knit.md"
+  },
+  {
     "path": "posts/2021-11-09-tidy-tuesday-2/",
     "title": "Tidy Tuesday 2",
     "description": "Tidy Tuesday 2! The Emmy Award.",
