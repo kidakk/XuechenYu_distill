@@ -1,0 +1,23 @@
+---
+title: "Capstone Project"
+description: |
+  This is our shiny app that explores the health factors across United States
+author:
+  - name: Yu Xuechen
+    url: {}
+date: 12-21-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+Our goal for this Shiny app is to explore some health related factors across United States.
+
+The first tab in the app explores the demographic data on the state level. Users are able to select the state and variable they would like to explore, and corresponding visualization will show up. 
+
+The second tab plots linear regression analysis for insurance, and explores the relationship between different demographic variables and percent of people getting insurance. 
+
+The third tab shows factors exploring health disparities across counties and states in the United States. User is able to select health related factors they would like to explore on the map. 
+
+[Shiny APP](https://xuechen-yu.shinyapps.io/DS_Capstone_Project/)
+

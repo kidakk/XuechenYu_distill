@@ -5,7 +5,7 @@
       "title": "blog",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2021-11-21T17:14:12-06:00"
+      "last_modified": "2021-11-21T17:40:12-06:00"
     },
     {
       "path": "index.html",
@@ -13,7 +13,7 @@
       "description": "Welcome to the website. I hope you enjoy it!\n",
       "author": [],
       "contents": "\n\nAbout me:\nEducation:\n\n\n\n",
-      "last_modified": "2021-11-21T17:14:14-06:00"
+      "last_modified": "2021-11-21T17:40:13-06:00"
     }
   ],
   "collections": ["posts/posts.json"]
